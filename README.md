@@ -1,2 +1,2 @@
 # pokemon-website
-This a localhost website to watch pokemons :)
+A local search engine for pokemons! 
