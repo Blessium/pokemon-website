@@ -1,0 +1,12 @@
+services:
+  pokemon-database:
+    image: "pokemon-database"
+    build:
+      context: ./database/
+    container_name: pokemon-database
+    environment:
+      - MARIADB_USER=exsuslabs
+      - MARIADB_PASSWORD=exsuslabs
+      - MARIADB_DATABASE=pokemon
+    ports:
+      - "3036:3036"
