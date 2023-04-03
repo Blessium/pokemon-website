@@ -1,3 +1,5 @@
+USE pokemon;
+
 CREATE TABLE pokemon_colors (
 	id INTEGER NOT NULL, 
 	identifier VARCHAR(100) NOT NULL, 
