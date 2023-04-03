@@ -1,3 +1,4 @@
+USE pokemon;
 CREATE TABLE pokemon_species (
 	id INTEGER NOT NULL, 
 	identifier VARCHAR(20) NOT NULL, 

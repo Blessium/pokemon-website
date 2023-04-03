@@ -1,3 +1,4 @@
+USE pokemon;
 
 CREATE TABLE regions (
 	id INTEGER NOT NULL, 
