@@ -8,5 +8,15 @@ services:
       - MARIADB_USER=exsuslabs
       - MARIADB_PASSWORD=exsuslabs
       - MARIADB_DATABASE=pokemon
+      - MARIADB_RANDOM_ROOT_PASSWORD=1  
     ports:
       - "3036:3036"
+  pokemon-backend:
+    image: "pokemon-backend"
+    build:
+      context: ./backend/
+    container_name: pokemon-backend
+    environment:
+      - FLASK_APP=main.py
+    ports:
+      - "5000:5000"
