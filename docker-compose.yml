@@ -1,3 +1,7 @@
+networks:
+  pokemon-net:
+    driver: bridge
+
 services:
   pokemon-database:
     image: "pokemon-database"
@@ -11,6 +15,9 @@ services:
       - MARIADB_RANDOM_ROOT_PASSWORD=1  
     ports:
       - "3036:3036"
+    networks:
+      - pokemon-net
+
   pokemon-backend:
     image: "pokemon-backend"
     build:
@@ -20,3 +27,9 @@ services:
       - FLASK_APP=main.py
     ports:
       - "5000:5000"
+    depends_on:
+      - pokemon-database
+    links:
+      - pokemon-database
+    networks:
+      - pokemon-net
