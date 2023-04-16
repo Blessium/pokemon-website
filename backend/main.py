@@ -23,10 +23,23 @@ def getPokemon():
     args = request.args
     pokemon = args.get('id')
 
-    query = 'SELECT p.id, p.identifier, p.height, p.weight, g.identifier FROM pokemon p \
+    query = 'SELECT p.id, p.identifier, p.height, p.weight, g.identifier, ps.identifier FROM pokemon p \
                 JOIN pokemon_species ps ON ps.id = p.species_id \
                     JOIN generations g ON g.id = ps.generation_id \
-                            WHERE p.identifier LIKE"' + pokemon + '%";'
+                            WHERE p.identifier LIKE"' + pokemon + '%"\
+                            GROUP BY p.id;'
+    mycursor.execute(query)
+
+    res = [dict((mycursor.description[i][0], value) for i, value in enumerate(row)) for row in mycursor.fetchall()] 
+
+    return json.dumps(mycursor.fetchall())
+
+@app.route("/pokemons", methods=['GET'])
+def getAllPokemons():
+
+    query = 'SELECT p.id, p.identifier \ 
+                FROM pokemon p \
+            ;'
     mycursor.execute(query)
 
     res = [dict((mycursor.description[i][0], value) for i, value in enumerate(row)) for row in mycursor.fetchall()] 

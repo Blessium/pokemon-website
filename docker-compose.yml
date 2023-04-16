@@ -13,6 +13,10 @@ services:
       - MARIADB_PASSWORD=exsuslabs
       - MARIADB_DATABASE=pokemon
       - MARIADB_RANDOM_ROOT_PASSWORD=1  
+    healthcheck:
+          test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+          timeout: 20s
+          retries: 1
     ports:
       - "3036:3036"
     networks:
@@ -28,8 +32,8 @@ services:
     ports:
       - "5000:5000"
     depends_on:
-      - pokemon-database
-    links:
-      - pokemon-database
+      pokemon-database:
+        condition: service_healthy
+
     networks:
       - pokemon-net
