@@ -9,16 +9,16 @@ services:
       context: ./database/
     container_name: pokemon-database
     environment:
-      - MARIADB_USER=exsuslabs
-      - MARIADB_PASSWORD=exsuslabs
-      - MARIADB_DATABASE=pokemon
-      - MARIADB_RANDOM_ROOT_PASSWORD=1  
+      - MYSQL_USER=exsuslabs
+      - MYSQL_PASSWORD=exsuslabs
+      - MYSQL_DATABASE=pokemon
+      - MYSQL_ROOT_PASSWORD=1  
     healthcheck:
           test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
           timeout: 20s
           retries: 1
     ports:
-      - "3036:3036"
+      - "8080:8080"
     networks:
       - pokemon-net
 
